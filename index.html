@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Living Bridges: coming soon</title>
+<meta name="description" content="Living Bridges is coming soon. Something good is on its way.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16304F; --teal:#7DD3DC; --amber:#F2A91B;
+  --disp:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif; --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:#0B1A2C;color:#fff;font:400 18px/1.6 var(--body);-webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;min-height:100dvh;position:relative;overflow:hidden;
+  padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:8px}
+
+/* background: video or photo (hero.mp4 / hero.jpg in the same folder), gradient if missing */
+.bg{position:fixed;inset:0;z-index:0;background:radial-gradient(circle at 18% 15%,#1B6674 0,transparent 55%),radial-gradient(circle at 88% 92%,#7A5209 0,transparent 50%),#0B1A2C}
+.bg .photo{position:absolute;inset:0;background:url("hero.jpg") center/cover no-repeat}
+.bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,18,32,.5),rgba(8,18,32,.7) 55%,rgba(8,18,32,.86))}
+
+.art{position:absolute;z-index:1;left:50%;top:50%;width:min(1100px,160vw);height:min(1100px,160vw);transform:translate(-50%,-50%);color:var(--teal);opacity:.14;pointer-events:none}
+.art ellipse{stroke-dasharray:2600;stroke-dashoffset:2600;animation:draw 3.4s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+main{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px 24px}
+.name{font:800 clamp(1.5rem,3.6vw,2.2rem) var(--disp);letter-spacing:-.01em;margin-bottom:22px;opacity:0;animation:fade 1s .3s forwards}
+h1{font:800 clamp(3.4rem,14vw,10rem)/.95 var(--disp);letter-spacing:-.04em;display:flex;flex-wrap:wrap;justify-content:center;gap:0 .28em;text-shadow:0 6px 40px rgba(0,0,0,.35)}
+h1 .w{display:inline-flex}
+h1 .c{display:inline-block;opacity:0;transform:translateY(40px);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
+h1 .w:last-child .c{background:linear-gradient(100deg,#7DD3DC,#F2A91B,#7DD3DC);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards,shine 5s linear 2s infinite}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes shine{to{background-position:200% 0}}
+.tease{margin-top:30px;height:1.8em;color:rgba(255,255,255,.85);font-size:1.25rem;display:flex;align-items:center;gap:12px;opacity:0;animation:fade 1s 1.6s forwards}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--amber);animation:pulse 2s infinite;flex:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(242,169,27,.6)}70%,100%{box-shadow:0 0 0 12px rgba(242,169,27,0)}}
+#line{transition:opacity .6s}
+@keyframes fade{to{opacity:1}}
+
+.signup{display:flex;gap:6px;width:100%;max-width:460px;background:#fff;border-radius:999px;padding:6px;margin-top:34px;box-shadow:0 20px 50px -20px rgba(0,0,0,.6);opacity:0;animation:fade 1s 2s forwards}
+.signup:focus-within{outline:3px solid rgba(242,169,27,.8)}
+.signup input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:400 1rem var(--body);padding:12px 18px;outline:0;color-scheme:light}
+.signup input::placeholder{color:#6B7C8F;opacity:1}
+.signup button{border:0;cursor:pointer;background:var(--amber);color:var(--ink);font:700 1rem var(--body);padding:12px 26px;border-radius:999px;transition:transform .15s}
+.signup button:hover{transform:translateY(-1px)}
+.thanks{margin-top:14px;min-height:1.6em;color:#BFE9EE;font-weight:600}
+
+footer{position:relative;z-index:2;text-align:center;padding:24px;color:rgba(255,255,255,.65);font-size:.88rem}
+@media(max-width:520px){.signup{flex-direction:column;border-radius:28px}.signup button{width:100%}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.art ellipse{stroke-dashoffset:0}h1 .c,.name,.tease,.signup{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <div class="photo"></div>
+  <video id="vid" autoplay muted loop playsinline preload="metadata"><source src="hero.mp4" type="video/mp4"></video>
+</div>
+<svg class="art" id="art" viewBox="0 0 800 800" aria-hidden="true"></svg>
+<main>
+  <div class="name">Living Bridges</div>
+  <h1 id="h" aria-label="Coming soon">Coming soon</h1>
+  <p class="tease"><span class="dot"></span><span id="line">Something good is on its way.</span></p>
+  <form class="signup" id="wl">
+    <input type="email" name="email" required placeholder="Your email address" aria-label="Email address" autocomplete="email">
+    <button type="submit">Notify me</button>
+  </form>
+  <p class="thanks" id="ok" role="status"></p>
+</main>
+<footer>© 2026 Living Bridges. All rights reserved.</footer>
+<script>
+// To collect real emails: create a free form at formspree.io and paste its URL here, e.g. 'https://formspree.io/f/abcdwxyz'
+var FORM_URL='';
+
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var s='<defs><filter id="w" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="46"/></filter></defs><g fill="none" stroke="currentColor" stroke-width="3.2" filter="url(#w)">';
+  for(var i=1;i<=22;i++)s+='<ellipse style="animation-delay:'+(i*0.14).toFixed(2)+'s" cx="400" cy="400" rx="'+(i*17)+'" ry="'+(i*13)+'"/>';
+  document.getElementById('art').innerHTML=s+'</g>';
+  var h=document.getElementById('h'),n=0,out='';
+  'Coming soon'.split(' ').forEach(function(w){out+='<span class="w" aria-hidden="true">';Array.from(w).forEach(function(c){out+='<span class="c" style="animation-delay:'+(0.5+n*0.07).toFixed(2)+'s">'+c+'</span>';n++});out+='</span>'});
+  h.innerHTML=out;
+  var L=['Something good is on its way.','Something is taking shape.','Built with care.','Almost here.'],k=0,el=document.getElementById('line');
+  if(!reduce)setInterval(function(){el.style.opacity=0;setTimeout(function(){k=(k+1)%L.length;el.textContent=L[k];el.style.opacity=1},600)},3600);
+  if(reduce){var v=document.getElementById('vid');v.removeAttribute('autoplay');v.pause()}
+})();
+
+document.getElementById('wl').addEventListener('submit',function(e){
+  e.preventDefault();
+  var f=this,ok=document.getElementById('ok'),thanks='You’re on the list. Thank you!';
+  if(!FORM_URL){ok.textContent=thanks;f.reset();return}
+  fetch(FORM_URL,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
+    .then(function(r){if(!r.ok)throw 0;ok.textContent=thanks;f.reset()})
+    .catch(function(){ok.textContent='Something went wrong. Please try again.'});
+});
+</script>
+</body>
+</html>
